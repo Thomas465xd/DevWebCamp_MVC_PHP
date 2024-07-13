@@ -2,9 +2,9 @@
 
 namespace Controllers;
 
+use MVC\Router;
 use Classes\Email;
 use Model\Usuario;
-use MVC\Router;
 
 class AuthController {
     public static function login(Router $router) {
@@ -56,7 +56,6 @@ class AuthController {
             $_SESSION = [];
             header('Location: /');
         }
-       
     }
 
     public static function registro(Router $router) {
@@ -138,7 +137,7 @@ class AuthController {
 
                     $alertas['exito'][] = 'Hemos enviado las instrucciones a tu email';
                 } else {
-                 
+                
                     // Usuario::setAlerta('error', 'El Usuario no existe o no esta confirmado');
 
                     $alertas['error'][] = 'El Usuario no existe o no esta confirmado';
@@ -235,8 +234,6 @@ class AuthController {
 
             Usuario::setAlerta('exito', 'Cuenta Comprobada Correctamente');
         }
-
-     
 
         $router->render('auth/confirmar', [
             'titulo' => 'Confirma tu cuenta DevWebcamp',
