@@ -47,6 +47,11 @@
     grid-template-columns: repeat($columnas, 1fr);
 }
 
+@mixin contenedor-md {
+    width: min(95%, 80rem);
+    margin: 0 auto;
+}
+
 @mixin contenedor {
     width: min(95%, 140rem);
     margin: 0 auto;
@@ -144,5 +149,32 @@
     &:hover {
         color: v.$azul;  // Cambia el color al hacer hover
         cursor: pointer;
+    }
+}
+
+@mixin shadow {
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+@mixin reset-lista {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+@mixin tags {
+    @include reset-lista;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+
+    > li {
+        background-color: v.$azul;
+        color: v.$blanco;
+        padding: 1rem;
+        border-radius: .5rem;
+        font-size: 1.4rem;
+        font-weight: v.$bold;
     }
 }
