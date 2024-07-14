@@ -130,3 +130,19 @@
         display: none;
     }
 }
+
+@mixin enlace {
+    color: v.$blanco;
+    font-size: 1.4rem;
+    text-transform: uppercase;
+    font-weight: v.$bold;
+    background-color: transparent;
+    border: none;
+
+    transition: color 0.3s ease-in-out;  // Animación de transición en el color
+
+    &:hover {
+        color: v.$azul;  // Cambia el color al hacer hover
+        cursor: pointer;
+    }
+}

@@ -31,6 +31,6 @@
 <body>
     <h1>404 - Página No Encontrada :( </h1>
     <p>La página que está buscando podría haber sido eliminada, cambiar de nombre o estar temporalmente fuera de servicio.</p>
-    <p>Volver a <a href="/">Inicio</a> o contactar soporte si cree que esto es un error.</p>
+    <p>Volver a <a href="/login">Inicio</a> o contactar soporte si cree que esto es un error.</p>
 </body>
 </html>

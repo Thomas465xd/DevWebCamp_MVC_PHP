@@ -7,6 +7,11 @@
     justify-content: space-between;
     gap: 2rem;
 
+    &--centrar {
+        @extend .acciones;
+        justify-content: center;
+    }
+
     &__enlace {
         color: v.$negro;
         font-size: 1.8rem;

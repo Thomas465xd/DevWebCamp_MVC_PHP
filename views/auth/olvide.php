@@ -2,7 +2,11 @@
     <h2 class="auth__heading"><?php echo $titulo; ?></h2>
     <p class="auth__texto">Recuperar Acceso a DevWebCamp</p>
 
-    <form action="" method="POST" class="formulario">
+    <?php 
+        require_once __DIR__ . "/../templates/alertas.php";
+    ?>
+
+    <form action="/olvide" method="POST" class="formulario">
 
         <div class="formulario__campo">
             <label for="email" class="formulario__label">Email</label>
