@@ -4,6 +4,7 @@ namespace Controllers;
 
 use MVC\Router;
 use Model\Ponente;
+use Classes\Paginacion;
 use Intervention\Image\ImageManagerStatic as Image;
 
 class PonentesController {
@@ -14,11 +15,33 @@ class PonentesController {
             header("Location: /login");
         }
 
-        $ponentes = Ponente::all();
+        // Obtener Pagina Actual
+        $pagina_actual = $_GET['page'];
+        $pagina_actual = filter_var($pagina_actual, FILTER_VALIDATE_INT);
+
+        if($pagina_actual === false || $pagina_actual < 1) {
+            header("Location: /admin/ponentes?page=1");
+        }
+
+        $registros_por_pagina = 6;
+        $total = Ponente::total();
+        $paginacion = new Paginacion($pagina_actual, $registros_por_pagina, $total);
+
+        if($paginacion->totalPaginas() < $pagina_actual) {
+            header("Location: /admin/ponentes?page=" . $paginacion->totalPaginas());
+        }
+
+        $ponentes = Ponente::paginar($registros_por_pagina, $paginacion->offset());
+
+        //debug($paginacion->offset());
+        //debug($paginacion->totalPaginas());
+        //debug($paginacion->paginaAnterior());
+        //debug($paginacion->paginaSiguiente());
 
         $router->render('admin/ponentes/index', [
             'titulo' => 'Ponentes / Conferencistas',
-            'ponentes' => $ponentes
+            'ponentes' => $ponentes, 
+            'paginacion' => $paginacion->paginacion(),
         ]);
     } 
 
