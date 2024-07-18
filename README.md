@@ -20,7 +20,7 @@ DevWebCamp is a website for an event designed for web developers. This project s
    cd DevWebCamp
 
 2. **Install PHP dependencies**:
-  ```sh
+
   composer install
 
 3. **set up Environment Variables**:
@@ -28,4 +28,18 @@ DevWebCamp is a website for an event designed for web developers. This project s
 4. **Initialize the Data Base**:
 
 5. **Start the Development Server**:
+## Contributing
+
+Contributions are welcome! Here's how you can contribute to this project:
+
+1. Fork the repository.
+2. Create a new branch (`git checkout -b feature/awesome-feature`).
+3. Make your changes.
+4. Commit your changes (`git commit -am 'Add some awesome feature'`).
+5. Push to the branch (`git push origin feature/awesome-feature`).
+6. Create a new Pull Request.
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
