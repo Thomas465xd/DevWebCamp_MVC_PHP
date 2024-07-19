@@ -16,6 +16,25 @@
             dia: +inputHiddenDia.value || ''
         }
 
+        // Verifica que ambos valores de búsqueda estén completos
+        if (!Object.values(busqueda).includes('')) {
+
+            async function iniciarApp() {
+                //console.log("Contienen Datos");
+                await busquedaEventos();
+    
+                const id = inputHiddenHora.value;
+    
+                // Resaltar la hora actual
+                const horaSeleccionada = document.querySelector(`[data-hora-id="${id}"]`);
+    
+                horaSeleccionada.classList.remove("horas__hora--deshabilitada");
+                horaSeleccionada.classList.add("horas__hora--seleccionada");
+            }
+
+            iniciarApp();
+        }
+
         function terminoBusqueda(evento) {
             busqueda[evento.target.name] = evento.target.value;
 
@@ -74,7 +93,7 @@
             const resultado = listadoHorasArray.filter(li => !horasTomadas.includes(li.dataset.horaId));
             resultado.forEach(li => li.classList.remove("horas__hora--deshabilitada"));
 
-            console.log(resultado);
+            //console.log(resultado);
             //console.log(listadoHoras)
             //console.log(horasTomadas);
 
