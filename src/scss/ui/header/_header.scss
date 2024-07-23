@@ -32,6 +32,16 @@
         @include m.enlace;
     }
 
+    &__form {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    &__sumbit {
+        @extend .header__enlace;
+    }
+
     &__contenido {
         padding-top: 10rem;
 
