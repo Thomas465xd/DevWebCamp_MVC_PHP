@@ -8,10 +8,9 @@
                     <input type="submit" value="Cerrar Sesión" class="header__submit--logout">
                 </form>
             <?php else : ?>
-
+                <a href="/registro" class="header__enlace">Registro</a>
+                <a href="/login" class="header__enlace">Iniciar Sesión</a>
             <?php endif; ?>
-            <a href="/registro" class="header__enlace">Registro</a>
-            <a href="/login" class="header__enlace">Iniciar Sesión</a>
         </nav>
 
         <div class="header__contenido">

@@ -1,0 +1,103 @@
+@use "base/variables" as v;
+@use "base/mixins" as m;
+
+.boletos {
+    @include m.contenedor-sm;
+    @include m.grid(1, 5rem);
+}
+
+.boleto {
+    width: min(100% - 5rem, 65rem);
+    margin: 0 auto;
+    margin-top: 5rem;
+    padding: 5rem;
+    border-radius: 2rem;
+    color: v.$blanco;
+    position: relative;
+
+    &::before,
+    &::after {
+        position: absolute;
+        content: '';
+        background-color: v.$blanco;
+        border-radius: 50%;
+        width: 5rem;
+        height: 5rem;
+        top: calc(50% - 2.5rem);
+    }
+
+    &::before {
+        clip-path: circle(50% at 50% 50%);
+        left: -2.5rem;
+    }
+
+    &::after {
+        clip-path: circle(50% at 50% 50%);
+        right: -2.5rem;
+    }
+
+    &--presencial {
+        background-color: hsla(209, 100%, 47%, 1);
+        background-image:
+            radial-gradient(at 40% 20%, hsla(28, 100%, 74%, 1) 0px, transparent 50%),
+            radial-gradient(at 80% 0%, hsla(189, 100%, 56%, 1) 0px, transparent 50%),
+            radial-gradient(at 0% 50%, hsla(355, 100%, 93%, 1) 0px, transparent 50%),
+            radial-gradient(at 80% 50%, hsla(340, 100%, 76%, 1) 0px, transparent 50%),
+            radial-gradient(at 0% 100%, hsla(22, 100%, 77%, 1) 0px, transparent 50%),
+            radial-gradient(at 80% 100%, hsla(242, 100%, 70%, 1) 0px, transparent 50%),
+            radial-gradient(at 0% 0%, hsla(343, 100%, 76%, 1) 0px, transparent 50%);
+    }
+
+    &--virtual {
+        background-color: hsla(178, 100%, 50%, 1);
+        background-image:
+            radial-gradient(at 31% 0%, hsla(209, 100%, 47%, 1) 0px, transparent 50%),
+            radial-gradient(at 0% 100%, hsla(189, 100%, 56%, 1) 0px, transparent 50%),
+            radial-gradient(at 0% 50%, hsla(178, 100%, 39%, 1) 0px, transparent 50%),
+            radial-gradient(at 42% 23%, hsla(178, 100%, 39%, 1) 0px, transparent 50%),
+            radial-gradient(at 0% 100%, hsla(178, 100%, 39%, 1) 0px, transparent 50%),
+            radial-gradient(at 81% 100%, hsla(242, 100%, 70%, 1) 0px, transparent 50%),
+            radial-gradient(at 0% 0%, hsla(178, 100%, 39%, 1) 0px, transparent 50%);
+    }
+
+    &--gratis {
+        background-color: hsla(178, 100%, 39%, 1);
+        background-image:
+            radial-gradient(at 57% 23%, hsla(209, 100%, 47%, 1) 0px, transparent 50%),
+            radial-gradient(at 80% 0%, hsla(178, 100%, 39%, 1) 0px, transparent 50%),
+            radial-gradient(at 70% 100%, hsla(209, 100%, 47%, 1) 0px, transparent 50%),
+            radial-gradient(at 45% 11%, hsla(178, 100%, 39%, 1) 0px, transparent 50%),
+            radial-gradient(at 0% 100%, hsla(209, 100%, 47%, 1) 0px, transparent 50%),
+            radial-gradient(at 32% 85%, hsla(178, 100%, 39%, 1) 0px, transparent 50%),
+            radial-gradient(at 0% 0%, hsla(209, 100%, 47%, 1) 0px, transparent 50%);
+    }
+
+    &__logo {
+        @include m.logo;
+        @include m.texto-fluido(2rem, 4rem);
+        text-align: left;
+    }
+
+    &__plan {
+        text-transform: uppercase;
+        font-size: 2rem;
+        margin: 3rem 0 0 0;
+    }
+
+    &__precio {
+        margin: 3rem 0 0 0;
+        font-weight: v.$black;
+        font-size: 4rem;
+    }
+
+    &__enlace-contenedor {
+        margin-top: 5rem;
+        display: flex;
+        justify-content: center;
+    }
+
+    &__enlace {
+        @include m.boton(v.$azul, v.$blanco);
+        width: auto;
+    }
+}

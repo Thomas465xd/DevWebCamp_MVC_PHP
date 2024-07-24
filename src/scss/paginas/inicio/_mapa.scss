@@ -1,0 +1,20 @@
+@use "base/variables" as v;
+@use "base/mixins" as m;
+
+.mapa {
+    @include m.contenedor;
+    height: 45rem;
+    margin-top: 5rem;
+
+    &__heading {
+        text-align: center;
+        margin: 0;
+    }
+
+    &__texto {
+        text-align: center;
+        font-size: 1.8rem;
+        color: v.$gris;
+        margin: 0;
+    }
+}
