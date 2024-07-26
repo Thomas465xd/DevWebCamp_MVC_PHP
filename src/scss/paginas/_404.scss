@@ -1,0 +1,22 @@
+@use "base/variables" as v;
+@use "base/mixins" as m;
+
+.pagina_404 {
+
+    &__contenedor {
+        @include m.contenedor;
+        @include m.grid(1, 3rem);
+        justify-items: center;
+        align-items: center;
+        text-align: center;
+    }
+
+    &__enlace {
+        color: v.$azul;
+        transition: color .3s ease-in-out;
+
+        &:hover {
+            color: darken(v.$azul, 10%);
+        }
+    }
+}

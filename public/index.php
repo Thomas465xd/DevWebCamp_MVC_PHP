@@ -11,7 +11,7 @@ use Controllers\PaginasController;
 use Controllers\RegalosController;
 use Controllers\PonentesController;
 use Controllers\DashboardController;
-use Controllers\RegistradosController;
+use Controllers\RegistrosController;
 
 $router = new Router();
 
@@ -62,10 +62,22 @@ $router->get('/admin/registrados', [RegistradosController::class, 'index']);
 
 $router->get('/admin/regalos', [RegalosController::class, 'index']);
 
+// Registro de Usuarios
+$router->get('/finalizar-registro', [RegistrosController::class, 'crear']);
+$router->post('/finalizar-registro/gratis', [RegistrosController::class, 'gratis']);
+$router->post('/finalizar-registro/pagar', [RegistrosController::class, 'pagar']);
+$router->get('/finalizar-registro/conferencias', [RegistrosController::class, 'conferencias']);
+
+// Boleto Virtual
+$router->get('/boleto', [RegistrosController::class, 'boleto']);
+$router->get('/boleto-pdf', [RegistrosController::class, 'boleto_pdf']);
+
 // Área Pública 
 $router->get('/', [PaginasController::class, 'index']);
 $router->get('/devwebcamp', [PaginasController::class, 'evento']);
 $router->get('/paquetes', [PaginasController::class, 'paquetes']);
 $router->get('/workshops-conferencias', [PaginasController::class, 'conferencias']);
+
+$router->get('/404', [PaginasController::class, 'error']);
 
 $router->comprobarRutas();

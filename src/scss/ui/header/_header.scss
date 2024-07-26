@@ -38,8 +38,12 @@
         gap: 2rem;
     }
 
-    &__sumbit {
+    &__submit {
         @extend .header__enlace;
+
+        &--logout {
+            @extend .header__submit;
+        }
     }
 
     &__contenido {

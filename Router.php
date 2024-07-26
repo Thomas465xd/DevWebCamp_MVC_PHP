@@ -37,9 +37,7 @@ class Router
         //}
 
         if (!$fn) {
-            http_response_code(404);
-            include_once __DIR__ . '/views/404.php';
-            return;
+            header('Location: /404');
         }
 
         // If route is found, call the associated function
