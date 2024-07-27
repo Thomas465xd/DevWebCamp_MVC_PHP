@@ -6,6 +6,7 @@ use Model\Dia;
 use Model\Hora;
 use MVC\Router;
 use Model\Evento;
+use Model\Regalo;
 use Model\Paquete;
 use Model\Ponente;
 use Model\Usuario;
@@ -43,6 +44,7 @@ class RegistrosController {
 
             // Verificar si el usuario ya esta registrado
             $registro = Registro::where('usuario_id', $_SESSION['id']);
+            //debug($registro);
             if(isset($registro) && $registro->paquete_id === "3") {
                 header("Location: /boleto?id=" . urlencode($registro->token));
             }
@@ -69,7 +71,6 @@ class RegistrosController {
 
     public static function boleto(Router $router) {
 
-        
         // Validar que el usuario este autenticado
         if(!isAuth()) {
             header('Location: /login');
@@ -133,5 +134,60 @@ class RegistrosController {
                 return;
             }
         }
+    }
+
+    public static function conferencias(Router $router) {
+
+        
+        // Validar que el usuario este autenticado
+        if(!isAuth()) {
+            header('Location: /login');
+        }
+
+        // Validar que el usuario tenga el plan presencial
+        $usuario_id = $_SESSION["id"];
+        $registro = Registro::where('usuario_id', $usuario_id);
+        
+        if(!isset($registro) || $registro->paquete_id !== "1") {
+            header('Location: /');
+        }
+
+        $eventos = Evento::ordenar('hora_id', 'ASC');
+        //debug($eventos);
+
+        // Conseguir Eventos Formateados
+        $eventos_formateados = [];
+
+        foreach($eventos as $evento) {
+
+            $evento->categoria = Categoria::find($evento->categoria_id);
+            $evento->dia = Dia::find($evento->dia_id);
+            $evento->hora = Hora::find($evento->hora_id);
+            $evento->ponente = Ponente::find($evento->ponente_id);
+
+            if($evento->dia_id === "1" && $evento->categoria_id === "1") {
+                $eventos_formateados['conferencias_viernes'][] = $evento;
+            }
+
+            if($evento->dia_id === "2" && $evento->categoria_id === "1") {
+                $eventos_formateados['conferencias_sabado'][] = $evento;
+            }
+
+            if($evento->dia_id === "1" && $evento->categoria_id === "2") {
+                $eventos_formateados['workshops_viernes'][] = $evento;
+            }
+
+            if($evento->dia_id === "2" && $evento->categoria_id === "2") {
+                $eventos_formateados['workshops_sabado'][] = $evento;
+            }
+        }
+
+        $regalos = Regalo::all('ASC');
+        
+        $router -> render('registros/conferencias',  [
+            'titulo' => 'Elige Workshops y Conferencias',
+            'eventos' => $eventos_formateados,
+            'regalos' => $regalos,
+        ]);
     }
 }
