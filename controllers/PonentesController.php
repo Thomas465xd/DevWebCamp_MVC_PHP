@@ -13,6 +13,7 @@ class PonentesController {
 
         if(!isAdmin()) {
             header("Location: /login");
+            return;
         }
 
         // Obtener Pagina Actual

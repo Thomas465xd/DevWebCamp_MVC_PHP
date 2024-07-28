@@ -35,11 +35,15 @@
             </h2>
         </a> 
 
+        <?php 
+            $isAuth = isAuth(); // Esta función debe determinar si el usuario está autenticado
+        ?>
+
         <nav class="navegacion">
             <a href="/devwebcamp" class="navegacion__enlace <?php echo pagina_actual("devwebcamp") ? 'navegacion__enlace--actual' : ''; ?>">Evento</a>
             <a href="/paquetes" class="navegacion__enlace <?php echo pagina_actual("paquetes") ? 'navegacion__enlace--actual' : ''; ?>">Paquetes</a>
             <a href="/workshops-conferencias" class="navegacion__enlace <?php echo pagina_actual("workshops-conferencias") ? 'navegacion__enlace--actual' : ''; ?>">Workshops / Conferencias</a>
-            <a href="/finalizar-registro" class="navegacion__enlace <?php echo pagina_actual("registro") ? 'navegacion__enlace--actual' : ''; ?>">Comprar Pase</a>
+            <a href="<?php echo $isAuth ? '/finalizar-registro' : '/registro'; ?>" class="navegacion__enlace <?php echo pagina_actual("registro") ? 'navegacion__enlace--actual' : ''; ?>">Comprar Pase</a>
         </nav>
     </div>
 </div>
