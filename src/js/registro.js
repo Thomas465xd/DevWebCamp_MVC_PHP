@@ -13,6 +13,8 @@ import Swal from "sweetalert2";
         const formularioRegistro = document.querySelector('#registro');
         formularioRegistro.addEventListener('submit', submitForm);
 
+        mostrarEventos();
+
         function seleccionarEvento(evento) {
     
             
@@ -66,6 +68,11 @@ import Swal from "sweetalert2";
                     eventoDOM.appendChild(botonEliminar);
                     resumen.appendChild(eventoDOM);
                 })
+            } else {
+                const noRegistro = document.createElement("P");
+                noRegistro.textContent = "No hay eventos registrados, añade hasta 5";
+                noRegistro.classList.add('registro__texto');
+                resumen.appendChild(noRegistro);
             }
         }
     
@@ -83,16 +90,11 @@ import Swal from "sweetalert2";
             }
         }
 
-        function submitForm(evento) {
+        async function submitForm(evento) {
             evento.preventDefault();
-            //console.log(submit);
 
-            // Obtener el Regalo
             const regaloId = document.querySelector('#regalo').value;
-            //console.log(regaloId);
-
             const eventosId = eventos.map(evento => evento.id);
-            //console.log(eventosId)
 
             if(eventosId.length === 0 || regaloId === '0') {
                 Swal.fire({
@@ -104,7 +106,47 @@ import Swal from "sweetalert2";
                 return;
             }
 
-            
+            const datos = new FormData();
+            datos.append('eventos', eventosId.join(',')); // Convertir array a string
+            datos.append('regalo_id', regaloId);
+
+            try {
+                const url = "/finalizar-registro/conferencias";
+                const respuesta = await fetch(url, {
+                    method: 'POST',
+                    body: datos
+                });
+
+                if (!respuesta.ok) {
+                    throw new Error('Error en la solicitud');
+                }
+
+                const resultado = await respuesta.json();
+
+                if (resultado.resultado === 'error') {
+                    Swal.fire({
+                        title: 'Error',
+                        text: resultado.mensaje,
+                        icon: 'error',
+                        confirmButtonText: 'OK'
+                    }).then(() => { location.reload(); })
+                } else {
+                    Swal.fire({
+                        title: 'Éxito',
+                        text: resultado.mensaje,
+                        icon: 'success',
+                        confirmButtonText: 'OK'
+                    }).then(() => { location.href = `/boleto?id=${resultado.token}`; }) // Redirigir o actualizar la página si es necesario
+                }
+            } catch (error) {
+                Swal.fire({
+                    title: 'Error',
+                    text: 'Hubo un error al procesar la solicitud',
+                    icon: 'error',
+                    confirmButtonText: 'OK'
+                });
+                console.error('Error:', error);
+            }
         }
     }
 })();
